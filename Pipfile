@@ -46,6 +46,7 @@ flask-cors = "*"
 gevent = "*"
 flask-pydantic = "*"
 pydantic = "*"
+flask-script = "*"
 
 [dev-packages]
 

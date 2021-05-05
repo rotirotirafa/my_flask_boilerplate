@@ -33,7 +33,6 @@ class Development(Config):
     DB_NAME = 'crud'
     SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    #TODO SQLAlchemy connection goes here
 
 
 BASE_DIR = os.path.abspath('.')
