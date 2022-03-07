@@ -23,6 +23,7 @@ class Staging(Config):
 
 
 class Development(Config):
+    FLASK_ENV = 'development'
     ENV = 'development'
     DEBUG = True
     DEVELOPMENT = True

@@ -7,7 +7,9 @@ from src.utils.urls import build_urls
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_pyfile('config.py')
+
+    app.config['ENV'] = 'development'
+    app.config['DEBUG'] = True
 
     from src.models import tables
     # db.init_app(app)
@@ -20,6 +22,3 @@ def create_app():
 
 
 application = create_app()
-
-if __name__ == "__main__":
-    application.run(HOST, PORT)
