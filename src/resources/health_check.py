@@ -5,8 +5,16 @@ class HealthCheck(Resource):
 
     @classmethod
     def get(cls):
-        return 'im aaaaAlive', 200
+        return 'Hello! Im Online!', 200
 
     @classmethod
     def post(cls):
-        return 'you post something', 200
+        return 'you want POST something', 200
+
+    @classmethod
+    def put(cls):
+        return 'you want PUT something', 200
+
+    @classmethod
+    def delete(cls):
+        return 'you want to DELETE something', 200
