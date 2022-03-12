@@ -18,7 +18,7 @@ class Production(Config):
     pass
 
 
-class Staging(Config):
+class Homolog(Config):
     DEBUG = True
 
 

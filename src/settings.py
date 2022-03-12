@@ -1,6 +1,5 @@
 import os
 
-from decouple import config
 
 ABSOLUTE_PATH = os.path.abspath(__file__)
 
@@ -8,15 +7,15 @@ ROOT = os.path.dirname(ABSOLUTE_PATH)
 
 BASE_DIR = os.path.dirname(ROOT)
 
-APP_SETTINGS = config("APP_SETTINGS", default="config.Development")
+APP_SETTINGS = os.getenv("APP_SETTINGS", default="config.Development")
 
-DEBUG = config("DEBUG", default=True, cast=bool)
+DEBUG = os.getenv("DEBUG", default=True)
 
-HOST = config("HOST", default="0.0.0.0")
-PORT = config("PORT", default=5000, cast=int)
+HOST = os.getenv("HOST", default="0.0.0.0")
+PORT = os.getenv("PORT", default=8080)
 
-ENVIRONMENT = config("ENVIRONMENT", default="development")
+ENVIRONMENT = os.getenv("ENVIRONMENT", default="development")
 
-BASE_PATH = config("BASE_PATH", default="boilerplate")
+BASE_PATH = os.getenv("BASE_PATH", default="boilerplate")
 
 VERSION_PREFIX = 'v1'
