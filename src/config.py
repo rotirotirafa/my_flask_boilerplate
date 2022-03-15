@@ -1,5 +1,6 @@
 import os
 
+BASE_DIR = os.path.abspath('.')
 
 class Config(object):
     DEBUG = False
@@ -15,7 +16,8 @@ class Config(object):
 
 
 class Production(Config):
-    pass
+    DEBUG = False
+    DEVELOPMENT = False
 
 
 class Homolog(Config):
@@ -32,8 +34,7 @@ class Development(Config):
     DB_HOST = '127.0.0.1'
     DB_PORT = 5432
     DB_NAME = 'crud'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{BASE_DIR}/src/app.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
-BASE_DIR = os.path.abspath('.')

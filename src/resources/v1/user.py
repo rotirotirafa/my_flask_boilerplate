@@ -1,11 +1,20 @@
 from flask_restful import Resource
 
+from src.repositories.users import UsersRepository
+
 
 class User(Resource):
 
+    user_repository = UsersRepository()
+
     @classmethod
-    def get(cls):
-        return 'Hello! Im Online!', 200
+    def get(cls, user_id: int = None):
+        try:
+            if user_id:
+                return cls.user_repository.list_user(user_id), 200
+            return cls.user_repository.list_users(), 200
+        except Exception as ex:
+            print(ex)
 
     @classmethod
     def post(cls):
