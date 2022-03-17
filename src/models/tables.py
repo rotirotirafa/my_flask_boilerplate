@@ -1,3 +1,4 @@
+import jwt
 from passlib.context import CryptContext
 
 from src.database.connection import db
@@ -76,34 +77,34 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    # def encode_auth_token(self, user_id):
-    #     """
-    #     Generates the Auth Token
-    #     :return: string
-    #     """
-    #     try:
-    #         payload = {
-    #             'sub': user_id
-    #         }
-    #         return jwt.encode(
-    #             payload,
-    #             'teste-key',
-    #             algorithm='HS256'
-    #         )
-    #     except Exception as e:
-    #         return e
-    #
-    # @staticmethod
-    # def decode_auth_token(auth_token):
-    #     """
-    #     Decodes the auth token
-    #     :param auth_token:
-    #     :return: integer|string
-    #     """
-    #     try:
-    #         payload = jwt.decode(auth_token, 'teste-key')
-    #         return payload['sub']
-    #     except jwt.ExpiredSignatureError:
-    #         return 'Signature expired. Please log in again.'
-    #     except jwt.InvalidTokenError:
-    #         return 'Invalid token. Please log in again.'
+    def encode_auth_token(self, user_id):
+        """
+        Generates the Auth Token
+        :return: string
+        """
+        try:
+            payload = {
+                'sub': user_id
+            }
+            return jwt.encode(
+                payload,
+                'teste-key',
+                algorithm='HS256'
+            )
+        except Exception as e:
+            return e
+
+    @staticmethod
+    def decode_auth_token(auth_token):
+        """
+        Decodes the auth token
+        :param auth_token:
+        :return: integer|string
+        """
+        try:
+            payload = jwt.decode(auth_token, 'teste-key')
+            return payload['sub']
+        except jwt.ExpiredSignatureError:
+            return {'message': 'Signature expired. Please log in again.', 'error': 'expired'}
+        except jwt.InvalidTokenError:
+            return {'message': 'Invalid token. Please log in again.', 'error': 'invalid'}

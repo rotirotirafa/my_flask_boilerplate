@@ -21,9 +21,9 @@ class User(Resource):
         return 'you want POST something', 200
 
     @classmethod
-    def put(cls):
+    def put(cls, user_id: int):
         return 'you want PUT something', 200
 
     @classmethod
-    def delete(cls):
+    def delete(cls, user_id: int):
         return 'you want to DELETE something', 200
