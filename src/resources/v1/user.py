@@ -1,9 +1,9 @@
-from flask_restful import Resource
-
 from src.repositories.users import UsersRepository
+from src.resources.v1.base import BaseResource
+from src.schemas.requests import BodyUserCreateSchema, BodyUserUpdateSchema
 
 
-class User(Resource):
+class User(BaseResource):
 
     user_repository = UsersRepository()
 
@@ -15,14 +15,19 @@ class User(Resource):
             return cls.user_repository.list_users(), 200
         except Exception as ex:
             print(ex)
+            raise ex
 
     @classmethod
-    def post(cls):
-        return 'you want POST something', 200
+    def post(cls, body: BodyUserCreateSchema):
+        try:
+            return cls.user_repository.create_user(body), 200
+        except Exception as ex:
+            print(ex)
+            raise ex
 
     @classmethod
-    def put(cls, user_id: int):
-        return 'you want PUT something', 200
+    def put(cls, body: BodyUserUpdateSchema, user_id: int):
+        return cls.user_repository.update_user(body, user_id), 200
 
     @classmethod
     def delete(cls, user_id: int):

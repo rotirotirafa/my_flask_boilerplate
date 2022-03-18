@@ -25,5 +25,3 @@ PORT = os.getenv("PORT", default=8080)
 BASE_PATH = os.getenv("BASE_PATH", default="boilerplate")
 
 VERSION_PREFIX = 'v1'
-
-

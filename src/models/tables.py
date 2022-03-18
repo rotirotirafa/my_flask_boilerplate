@@ -11,10 +11,10 @@ class User(db.Model):
     password = db.Column(db.String)
     user_type = db.Column(db.String)
 
-    def __init__(self, email, password, user_type):
+    def __init__(self, email: str, user_type: str, password: str = None):
         self.email = email
-        self.password = self.get_password_hash(password)
         self.user_type = user_type
+        self.password = self.get_password_hash(password)
 
     def to_dict(self):
         return {
@@ -67,9 +67,9 @@ class User(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    def update(self, email, password):
+    def update(self, email, user_type):
         self.email = email
-        self.password = self.get_password_hash(password)
+        self.user_type = user_type
         db.session.add(self)
         db.session.commit()
 

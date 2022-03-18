@@ -14,7 +14,7 @@ def build_urls(app):
     '''
     To add a new route
     '''
-    api.add_resource(User, f'{URL_PREFIX}/users/', f'{URL_PREFIX}/users/<int:user_id>/')
+    api.add_resource(User, f'{URL_PREFIX}/users/', f'{URL_PREFIX}/users/<user_id>/')
     api.add_resource(HealthCheck, f'/{URL_PREFIX}/health-check/')
 
     return api.init_app(app)
