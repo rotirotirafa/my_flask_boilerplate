@@ -32,18 +32,3 @@ class AuthRepository:
             )
         except Exception as e:
             return e
-
-    @staticmethod
-    def decode_auth_token(auth_token):
-        """
-        Decodes the auth token
-        :param auth_token:
-        :return: integer|string
-        """
-        try:
-            payload = jwt.decode(auth_token, SECRET)
-            return payload['sub']
-        except jwt.ExpiredSignatureError:
-            return {'message': 'Signature expired. Please log in again.', 'error': 'expired'}
-        except jwt.InvalidTokenError:
-            return {'message': 'Invalid token. Please log in again.', 'error': 'invalid'}

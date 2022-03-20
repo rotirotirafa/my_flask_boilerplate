@@ -1,7 +1,7 @@
 from functools import wraps
 
 import jwt
-from flask import request, jsonify
+from flask import request
 
 from src.settings import SECRET
 
@@ -14,11 +14,15 @@ def token_required(f):
             token = request.headers['x-access-tokens']
 
         if not token:
-            return jsonify({'message': 'a valid token is missing'})
+            return {'message': 'a valid token is missing'}, 400
         try:
-            data = jwt.decode(token, SECRET, algorithms=["HS256"])
-        except Exception as ex:
-            return jsonify({'message': 'token is invalid'})
+            jwt.decode(token, SECRET, algorithms=["HS256"])
+
+        except jwt.ExpiredSignatureError:
+            return {'message': 'Signature expired. Please log in again.', 'error': 'expired'}, 401
+
+        except jwt.InvalidTokenError:
+            return {'message': 'Invalid token. Please log in again.', 'error': 'invalid'}, 401
 
         return f(*args, **kwargs)
 
