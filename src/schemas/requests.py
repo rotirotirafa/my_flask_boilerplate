@@ -14,3 +14,7 @@ class BodyUserUpdateSchema(BaseModel):
     email: str
     user_type: str
 
+
+class QueryUserParamsSchema(BaseModel):
+    user_id: int = None
+

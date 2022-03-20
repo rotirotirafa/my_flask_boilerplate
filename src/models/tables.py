@@ -1,7 +1,10 @@
+from time import time
+
 import jwt
 from passlib.context import CryptContext
 
 from src.database.connection import db
+from src.settings import ONE_HOUR, SECRET
 
 
 class User(db.Model):
@@ -77,18 +80,19 @@ class User(db.Model):
         db.session.delete(self)
         db.session.commit()
 
-    def encode_auth_token(self, user_id):
+    def encode_auth_token(self, user):
         """
         Generates the Auth Token
         :return: string
         """
         try:
             payload = {
-                'sub': user_id
+                'sub': user,
+                'exp': time() + ONE_HOUR
             }
             return jwt.encode(
                 payload,
-                'teste-key',
+                SECRET,
                 algorithm='HS256'
             )
         except Exception as e:
@@ -102,7 +106,7 @@ class User(db.Model):
         :return: integer|string
         """
         try:
-            payload = jwt.decode(auth_token, 'teste-key')
+            payload = jwt.decode(auth_token, SECRET)
             return payload['sub']
         except jwt.ExpiredSignatureError:
             return {'message': 'Signature expired. Please log in again.', 'error': 'expired'}

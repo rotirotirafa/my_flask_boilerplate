@@ -12,9 +12,13 @@ class UsersRepository:
         return user.to_dict()
 
     def update_user(self, data: BodyUserUpdateSchema, user_id: int):
-        user = self.user_model.find_by_id(user_id)
-        data_to_update = User(email=data.email, user_type=data.user_type)
-        data_to_update.save()
+        user = self.user_model.create_instance_with_id(user_id)
+        user.update(data.email, data.user_type)
+        return True
+
+    def delete_user(self, user_id: int):
+        user = self.user_model.create_instance_with_id(user_id)
+        user.delete()
         return True
 
     def list_users(self):
