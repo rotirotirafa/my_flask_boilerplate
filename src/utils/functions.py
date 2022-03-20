@@ -14,7 +14,7 @@ def token_required(f):
             token = request.headers['x-access-tokens']
 
         if not token:
-            return {'message': 'a valid token is missing'}, 400
+            return {'message': 'a valid token is missing'}, 401
         try:
             jwt.decode(token, SECRET, algorithms=["HS256"])
 
