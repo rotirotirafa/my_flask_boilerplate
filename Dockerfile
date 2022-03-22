@@ -13,6 +13,7 @@ COPY . .
 
 CMD [ "flask init" ]
 
+# Apenas manter flask upgrade para casos de deploy.
 CMD [ "flask migrate" ]
 
 CMD [ "flask upgrade"]
