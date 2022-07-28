@@ -1,7 +1,5 @@
-from time import time
-
 import jwt
-
+from time import time
 from src.models.tables import User
 from src.settings import ONE_HOUR, SECRET
 

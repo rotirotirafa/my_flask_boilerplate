@@ -7,7 +7,9 @@ class UsersRepository:
     user_model = User
 
     def create_user(self, data: BodyUserCreateSchema) -> dict:
-        user = User(email=data.email, password=data.password, user_type=data.user_type)
+        user = self.user_model(email=data.email,
+                               password=data.password,
+                               user_type=data.user_type)
         user.save()
         return user.to_dict()
 
